@@ -1,8 +1,8 @@
 package co.edu.uptc.dao;
 
 import co.edu.uptc.model.Discipline;
-import co.edu.uptc.model.Student;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.result.UpdateResult;
 import org.bson.Document;
 
 import java.util.ArrayList;
@@ -23,11 +23,29 @@ public class DisciplineDAO {
         disciplinesCollection.insertOne(doc);
         return discipline;
     }
-    public Discipline deleteDiscipline(){
-        return null;
+    public Discipline deleteDiscipline(int idDiscipline){
+        Discipline disciplineToDelete = findDisciplineById(idDiscipline);
+        if( disciplineToDelete != null ){
+            Document query = new Document("_id", idDiscipline);
+            disciplinesCollection.deleteOne(query);
+        }
+        return disciplineToDelete;
     }
-    public Discipline modifyDiscipline(){
-        return null;
+    public Discipline modifyDiscipline(String name, int id){
+        Discipline discipline = findDisciplineById(id);
+
+        if(discipline != null){
+
+            discipline.setName(name);
+
+            Document query = new Document("_id", id);
+            Document updateQuery = new Document("$set", new Document("name", name));
+            UpdateResult result = disciplinesCollection.updateOne(query, updateQuery);
+
+            if (result.getModifiedCount() > 0){
+                return discipline;
+            }else return null;
+        }else return null;
     }
     public Discipline findDisciplineById(int idDiscipline){
         Document query = new Document("_id", idDiscipline);
