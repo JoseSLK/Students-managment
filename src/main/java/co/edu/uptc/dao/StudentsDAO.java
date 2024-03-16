@@ -2,7 +2,6 @@ package co.edu.uptc.dao;
 
 import co.edu.uptc.model.Student;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoCursor;
 import com.mongodb.client.result.UpdateResult;
 import org.bson.Document;
 
@@ -67,6 +66,28 @@ public class StudentsDAO {
                 return student;
             }else return null;
         }else return null;
+    }
+    public Student addEventToStudent(int studentId, int eventId) {
+        Student student = findStudentById(studentId);
+
+        if (student != null) {
+            ArrayList<Integer> events = student.getEvents();
+
+            if (!events.contains(eventId)) {
+                events.add(eventId);
+
+                Document query = new Document("_id", studentId);
+                Document updateQuery = new Document("$set", new Document("events", events));
+                UpdateResult result = studentCollection.updateOne(query, updateQuery);
+
+                if (result.getModifiedCount() > 0) {
+                    return findStudentById(studentId);
+                } else {
+                    return null;
+                }
+            } else return null;
+        } else return null;
+
     }
 
 }

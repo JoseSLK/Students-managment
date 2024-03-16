@@ -78,5 +78,32 @@ public class EventDAO {
             return null;
         }
     }
+
+    public Event addPositionToEvent(int eventId, int positionId) {
+        Event event = findEventById(eventId);
+
+        if (event != null) {
+            ArrayList<Integer> positions = event.getPosition();
+
+            if (!positions.contains(positionId)) {
+                positions.add(positionId);
+
+                Document query = new Document("_id", eventId);
+                Document updateQuery = new Document("$set", new Document("position", positions));
+                UpdateResult result = eventsCollection.updateOne(query, updateQuery);
+
+                if (result.getModifiedCount() > 0) {
+                    return findEventById(eventId);
+                } else {
+                    return null;
+                }
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
+    }
+
 }
 

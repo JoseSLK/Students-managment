@@ -1,6 +1,7 @@
 package co.edu.uptc.servlets;
 
 
+import co.edu.uptc.controller.GeneralController;
 import co.edu.uptc.dao.DisciplineDAO;
 import co.edu.uptc.dao.EventDAO;
 import co.edu.uptc.dao.StudentsDAO;
@@ -17,6 +18,7 @@ public class ServletMain extends HttpServlet {
     private DisciplineDAO disciplineDAO;
     private EventDAO eventDAO;
     private StudentsDAO studentsDAO;
+    private GeneralController generalController;
 
     @Override
     public void init() throws ServletException {
@@ -24,6 +26,7 @@ public class ServletMain extends HttpServlet {
         this.disciplineDAO = new DisciplineDAO();
         this.eventDAO = new EventDAO();
         this.studentsDAO = new StudentsDAO();
+        generalController = new GeneralController(disciplineDAO, eventDAO, studentsDAO);
     }
 
     @Override

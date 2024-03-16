@@ -62,4 +62,25 @@ public class DisciplineDAO {
             return new Discipline(name, id, participants);
         }else return null;
     }
+    public Discipline addParticipantToDiscipline(int disciplineId, int participantId) {
+        Discipline discipline = findDisciplineById(disciplineId);
+
+        if (discipline != null) {
+            ArrayList<Integer> participants = discipline.getParticipants();
+
+            if (!participants.contains(participantId)) {
+                participants.add(participantId);
+
+                discipline.setParticipants(participants);
+
+                Discipline updatedDiscipline = modifyDiscipline(discipline.getName(), disciplineId);
+
+                if (updatedDiscipline != null) {
+                    return updatedDiscipline;
+                } else return null;
+            }else return null;
+        }
+
+        return null;
+    }
 }
