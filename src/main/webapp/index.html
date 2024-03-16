@@ -1,10 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Club Deportivo</title>
+    <link rel="stylesheet" href="WEB-INF/style.css">
 </head>
 <body>
+    <header>
+        <h1>Club Deportivo</h1>
+    </header>
+    <main>
+        <div class="navbar">
+            <a href="#" id="inscription-tab" class="tab" onclick="openTab('inscription'); return false;">Inscripción estudiante</a>
+            <a href="#" id="search-tab" class="tab" onclick="openTab('search'); return false;">Buscar</a>
+        </div>
 
+        <div id="inscription-content" class="tabcontent">
+            <!-- Contenido de la pestaña de inscripción de estudiante -->
+            <h2>Inscripción de Estudiante</h2>
+            <!-- Aquí puedes agregar los campos y el formulario de inscripción -->
+            <button id="add-participant-btn">Añadir Participante</button>
+            
+                <!-- Aquí se cargarán dinámicamente los participantes -->
+            </ul>
+        </div>
+        <div id="search-content" class="tabcontent">
+            <!-- Contenido de la pestaña de búsqueda de estudiante -->
+            <h2>Buscar Estudiante</h2>
+            <!-- Aquí puedes agregar los campos y el formulario de búsqueda -->
+            <div id="filters">
+                <label for="event-filter">Filtrar por Evento:</label>
+                <select id="event-filter">
+                    <option value="todos">Todos</option>
+                    <!-- Aquí se cargarán dinámicamente los eventos -->
+                </select>
+                <label for="discipline-filter">Filtrar por Disciplina:</label>
+                <select id="discipline-filter">
+                    <option value="todos">Todos</option>
+                    <!-- Aquí se cargarán dinámicamente las disciplinas -->
+                </select>
+		<ul id="participant-list">
+            </div>
+            <button id="search-participants-btn">Buscar Participantes</button>
+            <ul id="search-results-list">
+                <!-- Aquí se mostrarán los resultados de la búsqueda -->
+            </ul>
+        </div>
+    </main>
+    <footer>
+        <p>© 2024 Club Deportivo - Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="WEB-INF/script.js"></script>
 </body>
 </html>
+
+
