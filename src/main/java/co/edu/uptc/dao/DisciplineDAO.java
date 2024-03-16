@@ -16,12 +16,14 @@ public class DisciplineDAO {
     }
 
     public Discipline addDiscipline(String name, int id){
-        Discipline discipline = new Discipline(name, id, new ArrayList<>());
-        Document doc = new Document("name", discipline.getName())
-                .append("_id", discipline.getId())
-                .append("participants", discipline.getParticipants());
-        disciplinesCollection.insertOne(doc);
-        return discipline;
+        if(findDisciplineById(id) == null){
+            Discipline discipline = new Discipline(name, id, new ArrayList<>());
+            Document doc = new Document("name", discipline.getName())
+                    .append("_id", discipline.getId())
+                    .append("participants", discipline.getParticipants());
+            disciplinesCollection.insertOne(doc);
+            return discipline;
+        }return null;
     }
     public Discipline deleteDiscipline(int idDiscipline){
         Discipline disciplineToDelete = findDisciplineById(idDiscipline);
