@@ -7,7 +7,7 @@ public class Student {
     private int age;
     private int discipline;
     private int id;
-    private ArrayList<Event> events;
+    private ArrayList<Integer> events;
 
     public Student(String name, int age, int discipline, int id) {
         this.name = name;
@@ -49,11 +49,11 @@ public class Student {
         this.id = id;
     }
 
-    public ArrayList<Event> getEvents() {
+    public ArrayList<Integer> getEvents() {
         return events;
     }
 
-    public void setEvents(ArrayList<Event> events) {
+    public void setEvents(ArrayList<Integer> events) {
         this.events = events;
     }
 }

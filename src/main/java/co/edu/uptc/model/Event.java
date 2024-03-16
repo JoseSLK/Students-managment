@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Event {
-    private Discipline discipline;
+    private int discipline;
     private ArrayList<Integer> position;
     private String location;
     private Date date;
     private String name;
     private int id;
 
-    public Event(Discipline discipline, String location, Date date, String name, int id) {
+    public Event(int discipline, String location, Date date, String name, int id) {
         this.discipline = discipline;
         this.position = new ArrayList<>();
         this.location = location;
@@ -20,11 +20,11 @@ public class Event {
         this.id = id;
     }
 
-    public Discipline getDiscipline() {
+    public int getDiscipline() {
         return discipline;
     }
 
-    public void setDiscipline(Discipline discipline) {
+    public void setDiscipline(int discipline) {
         this.discipline = discipline;
     }
 
