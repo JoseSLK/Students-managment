@@ -71,3 +71,5 @@ document.addEventListener('DOMContentLoaded', function() {
         alert('Funcionalidad de añadir participante aún no implementada.');
     });
 });
+
+

@@ -2,6 +2,7 @@ package co.edu.uptc.dao;
 
 import co.edu.uptc.model.Discipline;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.client.result.UpdateResult;
 import org.bson.Document;
 
@@ -10,6 +11,10 @@ import java.util.List;
 
 public class DisciplineDAO {
     private final MongoCollection<Document> disciplinesCollection;
+
+    public MongoCollection<Document> getDisciplinesCollection() {
+        return disciplinesCollection;
+    }
 
     public DisciplineDAO() {
         this.disciplinesCollection = ConnectionBaseData.getInstance().getDisciplineCollection();
@@ -80,7 +85,23 @@ public class DisciplineDAO {
                 } else return null;
             }else return null;
         }
-
         return null;
     }
+
+    public ArrayList<Discipline> getDisciplines(){
+        ArrayList<Discipline> disciplines = new ArrayList<>();
+        MongoCursor<Document> docDi = getDisciplinesCollection().find().iterator();
+        try {
+            while (docDi.hasNext()){
+                Document doc = docDi.next();
+                ArrayList<Integer> participantsList = (ArrayList<Integer>) doc.get("participants");
+                Discipline discipline = new Discipline(doc.getString("name"), doc.getInteger("_id"), participantsList);
+                disciplines.add(discipline);
+            }
+        } finally {
+            docDi.close();
+        }
+        return disciplines;
+    }
+
 }

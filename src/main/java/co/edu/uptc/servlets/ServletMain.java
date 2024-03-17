@@ -5,13 +5,19 @@ import co.edu.uptc.controller.GeneralController;
 import co.edu.uptc.dao.DisciplineDAO;
 import co.edu.uptc.dao.EventDAO;
 import co.edu.uptc.dao.StudentsDAO;
+import co.edu.uptc.model.Student;
+import com.google.gson.Gson;
+import com.mongodb.client.MongoCursor;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.bson.Document;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet(name = "ServletMain", value = "/servlet_main")
 public class ServletMain extends HttpServlet {
@@ -31,7 +37,20 @@ public class ServletMain extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        response.setContentType("application/json");
+        Gson gson = new Gson();
+        String type = request.getParameter("action");
+        switch (type){
+            case "list_student":
+                response.getWriter().write(gson.toJson(studentsDAO.getListStudents()));
+                break;
+            case "list_events":
+                response.getWriter().write(gson.toJson(eventDAO.getEvents()));
+                break;
+            case "list_disciplines":
+                response.getWriter().write(gson.toJson(disciplineDAO.getDisciplines()));
+                break;
+        }
     }
 
     @Override

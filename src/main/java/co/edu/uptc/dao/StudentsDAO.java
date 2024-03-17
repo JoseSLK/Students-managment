@@ -2,6 +2,7 @@ package co.edu.uptc.dao;
 
 import co.edu.uptc.model.Student;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.client.result.UpdateResult;
 import org.bson.Document;
 
@@ -90,4 +91,24 @@ public class StudentsDAO {
 
     }
 
+    public ArrayList<Student> getListStudents(){
+        ArrayList<Student> students = new ArrayList<>();
+
+        MongoCursor<Document> cursor = getStudentCollection().find().iterator();
+        try {
+            while (cursor.hasNext()) {
+                Document doc = cursor.next();
+                Student student = new Student(
+                        doc.getString("name"),
+                        doc.getInteger("age"),
+                        doc.getInteger("discipline"),
+                        doc.getInteger("_id")
+                );
+                students.add(student);
+            }
+        } finally {
+            cursor.close();
+        }
+        return students;
+    }
 }

@@ -2,7 +2,9 @@ package co.edu.uptc.dao;
 
 
 import co.edu.uptc.model.Event;
+import co.edu.uptc.model.Student;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.client.result.UpdateResult;
 import org.bson.Document;
 import java.util.ArrayList;
@@ -14,6 +16,10 @@ public class EventDAO {
 
     public EventDAO() {
         this.eventsCollection = ConnectionBaseData.getInstance().getEventsCollection();
+    }
+
+    public MongoCollection<Document> getEventsCollection() {
+        return eventsCollection;
     }
 
     public Event addEvent(int discipline, String location, Date date, String name, int id) {
@@ -105,5 +111,24 @@ public class EventDAO {
         }
     }
 
+    public ArrayList<Event> getEvents(){
+        ArrayList<Event> studentsDoc = new ArrayList<>();
+        MongoCursor<Document> cursor = getEventsCollection().find().iterator();
+        try {
+            while (cursor.hasNext()){
+                Document doc = cursor.next();
+                Event event = new Event(doc.getInteger("disciplineId"),
+                        doc.getString("location"),
+                        doc.getDate("date"),
+                        doc.getString("name"),
+                        doc.getInteger("_id")
+                );
+                studentsDoc.add(event);
+            }
+        } finally {
+            cursor.close();
+        }
+        return studentsDoc;
+    }
 }
 

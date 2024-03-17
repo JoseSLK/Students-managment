@@ -39,31 +39,48 @@
     </nav>
 </header>
 
-<main>
-    <div id="search-content" class="tabcontent">
-        <!-- Contenido de la pestaña de búsqueda de estudiante -->
-        <h2>Buscar Estudiante</h2>
-        <!-- Aquí puedes agregar los campos y el formulario de búsqueda -->
-        <div id="filters">
-            <label for="event-filter">Filtrar por Evento:</label>
-            <select id="event-filter">
-                <option value="todos">Todos</option>
-                <!-- Aquí se cargarán dinámicamente los eventos -->
-            </select>
-            <label for="discipline-filter">Filtrar por Disciplina:</label>
-            <select id="discipline-filter">
-                <option value="todos">Todos</option>
-                <!-- Aquí se cargarán dinámicamente las disciplinas -->
-            </select>
-            <ul id="participant-list"></ul>
-        </div>
-        <button id="search-participants-btn">Buscar Participantes</button>
-        <ul id="search-results-list">
-            <!-- Aquí se mostrarán los resultados de la búsqueda -->
-        </ul>
+<main class="container-flex">
 
+    <div id="search-content" class="tabcontent">
+        <div class="row">
+            <div class="col-6">
+                <h2>Buscar Estudiante</h2>
+                <div id="filters">
+                    <label for="event-filter">Filtrar por Evento:</label>
+                    <select id="event-filter">
+                        <option value="todos">Todos</option>
+                    </select>
+                    <label for="discipline-filter">Filtrar por Disciplina:</label>
+                    <select id="discipline-filter">
+                        <option value="todos">Todos</option>
+                    </select>
+                    <ul id="participant-list"></ul>
+                </div>
+                <button id="search-participants-btn">Buscar Participantes</button>
+                <ul id="search-results-list">
+                </ul>
+            </div>
+            <div class="col-6">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="table_students">
+                        <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Edad</th>
+                            <th scope="col">Disciplina</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
-    <div id="inscription-content" class="tabcontent">
+
+    <div id="inscription-content" class="row">
         <!-- Contenido de la pestaña de inscripción de estudiante -->
         <h2>Inscripción de Estudiante</h2>
         <!-- Aquí puedes agregar los campos y el formulario de inscripción -->
@@ -73,7 +90,25 @@
         </ul>
     </div>
 
-    <div class="container" id="events-options">
+    <div class="row" id="events-options">
+        <div class="col">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="table_events">
+                    <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Ubicacion</th>
+                            <th scope="col">Disciplina</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
     </div>
 
@@ -84,11 +119,12 @@
 
 
     </main>
-    <footer>
+    <footer id="footer">
         <p>© 2024 Club Deportivo - Todos los derechos reservados.</p>
     </footer>
 
     <script src="js/script.js"></script>
+    <script src="js/request_student.js"></script>
 </body>
 </html>
 
