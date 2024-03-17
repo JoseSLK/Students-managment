@@ -5,6 +5,7 @@ body {
 }
 
 header {
+    font-family: 'Quicksand', sans-serif;
     background-color: #333;
     color: #fff;
     padding: 8px;
@@ -16,6 +17,13 @@ main {
 }
 
 #filters {
+    margin-bottom: 20px;
+}
+.h2, h2 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.5rem;
+    color: #333;
+    text-align: left;
     margin-bottom: 20px;
 }
 
@@ -51,10 +59,10 @@ button {
 }
 
 button:hover {
-    background-color: #218838;
+    background-color: #f7d9e2;
 }
 
-/* Estilos para las pestañas */
+
 .navbar {
     overflow: hidden;
     background-color: #333333;
@@ -79,7 +87,7 @@ button:hover {
     padding: 20px;
 }
 
-/* Mostrar el contenido de la pestaña seleccionada */
+
 .tabcontent.active {
     display: block;
 }
@@ -90,7 +98,7 @@ html {
 
 body {
     margin: 0;
-    padding-bottom: 50px; /* Altura del pie de página */
+    padding-bottom: 50px;
 }
 
 footer {
@@ -104,7 +112,7 @@ footer {
 }
 
 #main_title {
-    font-family: "Courier New", serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 30px;
     padding: 2px;
     margin-right: 100px;
@@ -117,5 +125,44 @@ footer {
     padding: 5px 5px 5px 30px;
 }
 .navbar-nav {
-    justify-content: end; /* Coloca los elementos del navbar al final */
+    justify-content: end;
 }
+
+.input-group {
+    padding-bottom: 10px;
+}
+.input-group-text {
+    font-size: 0.9rem;
+}
+.form-control {
+    font-size: 0.9rem;
+    width: 150px;
+}
+.input-group {
+    padding-bottom: 10px;
+    text-align: center;
+}
+.separator {
+    width: 100%;
+    height: 10px;
+    background-color: #f7d9e2;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    transition: height 0.3s ease;
+}
+
+.separator:hover {
+    height: 20px;
+}
+
+#search-content {
+    font-family: 'Quicksand', sans-serif;
+}
+#inscription-content{
+    font-family: 'Quicksand', sans-serif;
+}
+#events-options{
+    font-family: 'Quicksand', sans-serif;
+}
+
+

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap">
     <title>Club Deportivo</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -13,12 +14,12 @@
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid" id="container_header">
             <div class="row align-items-center">
-                <div class="col-md-auto mb-3 mb-md-0"> <!-- Cambiado tamaño de la columna a col-md-auto -->
-                    <a class="navbar-brand mr-3" id="main_title" href="#">Club Deportivo</a> <!-- Agregado margen derecho -->
+                <div class="col-md-auto mb-3 mb-md-0">
+                    <a class="navbar-brand mr-3" id="main_title" href="#">Club Deportivo</a>
                 </div>
-                <div class="col-md-6"> <!-- Cambiado tamaño de la columna a col-md-6 -->
+                <div class="col-md-6">
                     <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav ml-auto"> <!-- Agregamos ml-auto aquí -->
+                        <ul class="navbar-nav ml-auto">
                             <li class="nav-item">
                                 <a class="nav-link" id="ins_p" href="#inscription-content">Inscripción</a>
                             </li>
@@ -48,11 +49,11 @@
                 <div id="filters">
                     <label for="event-filter">Filtrar por Evento:</label>
                     <select id="event-filter">
-                        <option value="todos">Todos</option>
+                        <option value="0" selected>Eventos</option>
                     </select>
                     <label for="discipline-filter">Filtrar por Disciplina:</label>
-                    <select id="discipline-filter">
-                        <option value="todos">Todos</option>
+                    <select id="discipline-filter" class="form-select form-select-sm">
+                        <option value="0" selected>Disciplinas</option>
                     </select>
                     <ul id="participant-list"></ul>
                 </div>
@@ -60,35 +61,84 @@
                 <ul id="search-results-list">
                 </ul>
             </div>
-            <div class="col-6">
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="table_students">
-                        <thead>
-                        <tr>
-                            <th scope="col">Id</th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Edad</th>
-                            <th scope="col">Disciplina</th>
-                        </tr>
-                        </thead>
-                        <tbody>
 
-                        </tbody>
-                    </table>
-                </div>
-            </div>
         </div>
     </div>
 
+    <div class="separator"></div>
+
     <div id="inscription-content" class="row">
         <!-- Contenido de la pestaña de inscripción de estudiante -->
-        <h2>Inscripción de Estudiante</h2>
-        <!-- Aquí puedes agregar los campos y el formulario de inscripción -->
-        <button id="add-participant-btn">Añadir Participante</button>
+        <h2 class="title_sub">Inscripción de Estudiante</h2>
 
-        <!-- Aquí se cargarán dinámicamente los participantes -->
-        </ul>
+        <div class="col-4">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputName">Nombre</span>
+                <input type="text" class="form-control" aria-label="Nombre" aria-describedby="inputName" id="input-name">
+            </div>
+
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputAge">Edad</span>
+                <input type="number" class="form-control" aria-label="Edad" aria-describedby="inputAge" id="input-age">
+            </div>
+
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputId">Id</span>
+                <input type="number" class="form-control" aria-label="id" aria-describedby="inputId" id="input-id">
+            </div>
+            <div class="input-group mb-3">
+                <select class="form-select form-select-sm" aria-label="Small select example" id="regi_discipline">
+                    <option value="0" selected>Disciplinas</option>
+                </select>
+            </div>
+
+            <button id="add-participant-btn">Añadir Participante</button>
+
+            <h2 class="title_sub">Eliminar estudiante de la base de datos</h2>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputIdDelete">Id</span>
+                <input type="number" class="form-control" aria-label="id" aria-describedby="inputIdDelete" id="input-idDelete">
+            </div>
+            <button id="delete-participant-btn">Eliminar estudiante</button>
+
+        </div>
+        <div class="col-8">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="table_students">
+                    <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Edad</th>
+                        <th scope="col">Disciplina</th>
+                        <th scope="col">Id:Eventos</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
     </div>
+
+    <div id="add-event-to-student" class="row">
+        <h2 class="title_sub">Agregar un evento pendiente al estudiante</h2>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="input-idStudent">Id:estudiante</span>
+            <input type="number" class="form-control" aria-label="id" aria-describedby="input-idStudent" id="input-idSt">
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="input-idEvent">Id:evento</span>
+            <input type="number" class="form-control" aria-label="id" aria-describedby="input-idEvent" id="input-idEv">
+        </div>
+
+        <button id="add-eventSt">Anadir evento</button>
+
+    </div>
+
+    <div class="separator"></div>
 
     <div class="row" id="events-options">
         <div class="col">
@@ -123,7 +173,6 @@
         <p>© 2024 Club Deportivo - Todos los derechos reservados.</p>
     </footer>
 
-    <script src="js/script.js"></script>
     <script src="js/request_student.js"></script>
 </body>
 </html>

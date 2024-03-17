@@ -72,9 +72,8 @@ public class EventDAO {
         Document doc = eventsCollection.find(query).first();
 
         if (doc != null) {
-            int discipline = doc.getInteger("discipline");
-            List<Integer> positionIds = (List<Integer>) doc.get("position");
-            ArrayList<Integer> position = new ArrayList<>(positionIds);
+            int discipline = doc.getInteger("disciplineId");
+            ArrayList<Integer> positionIds = (ArrayList<Integer>) doc.get("positions");
             String location = doc.getString("location");
             Date date = doc.getDate("date");
             String name = doc.getString("name");

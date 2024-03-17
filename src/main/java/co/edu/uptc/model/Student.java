@@ -17,6 +17,14 @@ public class Student {
         this.events = new ArrayList<>();
     }
 
+    public Student(String name, int age, int discipline, int id, ArrayList<Integer> events) {
+        this.name = name;
+        this.age = age;
+        this.discipline = discipline;
+        this.id = id;
+        this.events = events;
+    }
+
     public String getName() {
         return name;
     }

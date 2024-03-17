@@ -1,5 +1,6 @@
 package co.edu.uptc.dao;
 
+import co.edu.uptc.model.Event;
 import co.edu.uptc.model.Student;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
@@ -98,11 +99,13 @@ public class StudentsDAO {
         try {
             while (cursor.hasNext()) {
                 Document doc = cursor.next();
+                ArrayList<Integer> events = (ArrayList<Integer>) doc.get("events");
                 Student student = new Student(
                         doc.getString("name"),
                         doc.getInteger("age"),
                         doc.getInteger("discipline"),
-                        doc.getInteger("_id")
+                        doc.getInteger("_id"),
+                        events
                 );
                 students.add(student);
             }
