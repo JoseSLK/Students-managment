@@ -26,9 +26,6 @@ public class GeneralController {
             return new Student(name, age, discipline, id);
         }else return null;
     }
-//    public Discipline addDiscipline(String name, int id){
-//        return disciplineDAO.addDiscipline(name,id);
-//    }
 
     public Event addEvent(int disciplineId, String location, Date date, String name, int id) {
         Discipline discipline = disciplineDAO.findDisciplineById(disciplineId);
@@ -54,14 +51,13 @@ public class GeneralController {
         }
         return null;
     }
-
     public Event addPositionToEvent(int eventId, int positionId){
-        if(studentsDAO.findStudentById(positionId) != null){
-            return eventDAO.addPositionToEvent(eventId,positionId);
+        Student student = studentsDAO.findStudentById(positionId);
+        Event event = eventDAO.findEventById(eventId);
+        if(student != null && event != null){
+            if (student.getDiscipline() == event.getDisciplineId()){
+                return eventDAO.addPositionToEvent(eventId,positionId);
+            }else return null;
         }else return null;
     }
-
-
-
-
 }

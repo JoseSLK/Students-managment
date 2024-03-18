@@ -2,14 +2,12 @@ package co.edu.uptc.dao;
 
 
 import co.edu.uptc.model.Event;
-import co.edu.uptc.model.Student;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.result.UpdateResult;
 import org.bson.Document;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class EventDAO {
     private final MongoCollection<Document> eventsCollection;
@@ -24,9 +22,9 @@ public class EventDAO {
 
     public Event addEvent(int discipline, String location, Date date, String name, int id) {
         Event event = new Event(discipline, location, date, name, id);
-        Document doc = new Document("discipline", event.getDiscipline())
+        Document doc = new Document("disciplineId", event.getDisciplineId())
                 .append("_id", event.getId())
-                .append("position", event.getPosition())
+                .append("positions", event.getPositions())
                 .append("location", event.getLocation())
                 .append("date", event.getDate())
                 .append("name", event.getName());
@@ -88,13 +86,9 @@ public class EventDAO {
         Event event = findEventById(eventId);
 
         if (event != null) {
-            ArrayList<Integer> positions = event.getPosition();
-
-            if (!positions.contains(positionId)) {
-                positions.add(positionId);
-
+            if (!event.getPositions().contains(positionId)) {
                 Document query = new Document("_id", eventId);
-                Document updateQuery = new Document("$set", new Document("position", positions));
+                Document updateQuery = new Document("$addToSet", new Document("positions", positionId));
                 UpdateResult result = eventsCollection.updateOne(query, updateQuery);
 
                 if (result.getModifiedCount() > 0) {
@@ -116,11 +110,13 @@ public class EventDAO {
         try {
             while (cursor.hasNext()){
                 Document doc = cursor.next();
+                ArrayList<Integer> positions = (ArrayList<Integer>) doc.get("positions");
                 Event event = new Event(doc.getInteger("disciplineId"),
                         doc.getString("location"),
                         doc.getDate("date"),
                         doc.getString("name"),
-                        doc.getInteger("_id")
+                        doc.getInteger("_id"),
+                        positions
                 );
                 studentsDoc.add(event);
             }

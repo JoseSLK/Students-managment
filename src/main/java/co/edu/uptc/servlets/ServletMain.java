@@ -5,8 +5,10 @@ import co.edu.uptc.controller.GeneralController;
 import co.edu.uptc.dao.DisciplineDAO;
 import co.edu.uptc.dao.EventDAO;
 import co.edu.uptc.dao.StudentsDAO;
+import co.edu.uptc.model.Event;
 import co.edu.uptc.model.Student;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.mongodb.client.MongoCursor;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -77,6 +79,31 @@ public class ServletMain extends HttpServlet {
                     response.getWriter().write("");
                 }
                 break;
+            case "add_event":
+                BufferedReader ev = request.getReader();
+                Event event = gson.fromJson(ev, Event.class);
+                if(generalController.addEvent(event.getDisciplineId(), event.getLocation(), event.getDate(), event.getName(), event.getId()) != null){
+                    response.getWriter().write(gson.toJson(event));
+                } else {
+                    response.getWriter().write("");
+                }
+                break;
+            case "add_position_student":
+                BufferedReader reader = request.getReader();
+                StringBuilder requestBody = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    requestBody.append(line);
+                }
+                reader.close();
+                JsonObject jsonObject = gson.fromJson(requestBody.toString(), JsonObject.class);
+                int eventId = jsonObject.get("eventId").getAsInt();
+                int studentId = jsonObject.get("studentId").getAsInt();
+                Event event1 = generalController.addPositionToEvent(eventId, studentId);
+                if(event1 != null){
+                    response.getWriter().write(event1.getName()+": jugador agregado correctamente");
+                }else response.getWriter().write("");
+                break;
 
         }
     }
@@ -92,6 +119,12 @@ public class ServletMain extends HttpServlet {
                 int id = Integer.parseInt(req.getParameter("id"));
                 if(studentsDAO.findStudentById(id) != null){
                     resp.getWriter().write(gson.toJson(studentsDAO.deleteStudent(id)));
+                }else resp.getWriter().write("");
+                break;
+            case "delete_event":
+                int idEvent = Integer.parseInt(req.getParameter("id"));
+                if (eventDAO.findEventById(idEvent) != null){
+                    resp.getWriter().write(gson.toJson(eventDAO.deleteEvent(idEvent)));
                 }else resp.getWriter().write("");
                 break;
         }

@@ -1,5 +1,4 @@
 tableStudent();
-tableEvents();
 
 function tableStudent(){
     const xhr = new XMLHttpRequest();
@@ -37,6 +36,7 @@ function tableStudent(){
                 })
                 fill_select("discipline-filter", "list_disciplines");
                 fill_select("regi_discipline", "list_disciplines");
+                fill_select("select-discipline", "list_disciplines");
 
             } else {
                 alert("No hay nada de data")
@@ -63,45 +63,6 @@ function fill_select(selectId, action) {
     };
     xhr.send(null);
 }
-function tableEvents(){
-    const xhr = new XMLHttpRequest();
-    let action = "list_events";
-    xhr.open("GET", "http://localhost:8080/Students_web_managment_war_exploded/servlet_main?action=" + action, true);
-    xhr.onreadystatechange = () => {
-        const table = document.querySelector("#table_events")
-        const tbody = table.querySelector("tbody");
-
-        tbody.innerHTML = "";
-
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            if (xhr.responseText != null) {
-                const events = JSON.parse(xhr.responseText);
-                events.forEach(item => {
-                    const newRow = tbody.insertRow();
-
-                    const idEvent = newRow.insertCell();
-                    idEvent.innerHTML = item.id;
-
-                    const nameEvent = newRow.insertCell();
-                    nameEvent.innerHTML = item.name;
-
-                    const dateEvent = newRow.insertCell();
-                    dateEvent.innerHTML = item.date;
-
-                    const locationEvent = newRow.insertCell();
-                    locationEvent.innerHTML = item.location;
-
-                    const disciplineEvent = newRow.insertCell();
-                    disciplineEvent.innerHTML = item.discipline;
-                })
-                fill_select("event-filter", "list_events");
-            } else {
-                alert("No hay nada de data")
-            }
-        }
-    }
-    xhr.send(null);
-}
 
 function isNumber(string) {
     return !isNaN(string);
@@ -109,7 +70,6 @@ function isNumber(string) {
 function validateInput(input) {
     return input && !isNaN(input);
 }
-
 function stringVerify(string) {
     return string.trim() !== '' && /^[a-zA-Z\s]+$/.test(string);
 }

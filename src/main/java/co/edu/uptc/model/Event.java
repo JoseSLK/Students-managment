@@ -4,36 +4,45 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Event {
-    private int discipline;
-    private ArrayList<Integer> position;
+    private int disciplineId;
+    private ArrayList<Integer> positions;
     private String location;
     private Date date;
     private String name;
     private int id;
 
     public Event(int discipline, String location, Date date, String name, int id) {
-        this.discipline = discipline;
-        this.position = new ArrayList<>();
+        this.disciplineId = discipline;
+        this.positions = new ArrayList<>();
         this.location = location;
         this.date = date;
         this.name = name;
         this.id = id;
     }
 
-    public int getDiscipline() {
-        return discipline;
+    public Event(int disciplineId, String location, Date date, String name, int id, ArrayList<Integer> positions) {
+        this.disciplineId = disciplineId;
+        this.positions = positions;
+        this.location = location;
+        this.date = date;
+        this.name = name;
+        this.id = id;
     }
 
-    public void setDiscipline(int discipline) {
-        this.discipline = discipline;
+    public int getDisciplineId() {
+        return disciplineId;
     }
 
-    public ArrayList<Integer> getPosition() {
-        return position;
+    public void setDisciplineId(int disciplineId) {
+        this.disciplineId = disciplineId;
     }
 
-    public void setPosition(ArrayList<Integer> position) {
-        this.position = position;
+    public ArrayList<Integer> getPositions() {
+        return positions;
+    }
+
+    public void setPositions(ArrayList<Integer> positions) {
+        this.positions = positions;
     }
 
     public String getLocation() {

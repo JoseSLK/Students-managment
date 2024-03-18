@@ -133,15 +133,46 @@
             <span class="input-group-text" id="input-idEvent">Id:evento</span>
             <input type="number" class="form-control" aria-label="id" aria-describedby="input-idEvent" id="input-idEv">
         </div>
-
         <button id="add-eventSt">Anadir evento</button>
-
     </div>
 
     <div class="separator"></div>
 
     <div class="row" id="events-options">
-        <div class="col">
+        <h2 class="title_sub">Agregar un evento</h2>
+        <div class="col-4">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="input-name-event">Nombre</span>
+                <input type="text" class="form-control" aria-label="Nombre" aria-describedby="input-name-event" id="inputNEA">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="input-id-event">Id</span>
+                <input type="number" class="form-control" aria-label="id" aria-describedby="input-id-event" id="inputIE">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="input-location">Ubicacion</span>
+                <input type="text" class="form-control" aria-label="Nombre" aria-describedby="input-location" id="inputUBE">
+            </div>
+            <div class="input-group mb-3">
+                <select class="form-select form-select-sm" aria-label="Small select example" id="select-discipline">
+                    <option value="0" selected>Disciplinas</option>
+                </select>
+            </div>
+            <div class="input-group mb-3">
+                <input type="date" id="date">
+            </div>
+
+            <button id="add-event">Anadir evento</button>
+
+            <h2 class="title_sub">Eliminar evento de la lista de eventos</h2>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="input-id-delete">Id</span>
+                <input type="number" class="form-control" aria-label="id" aria-describedby="input-id-delete" id="inputEventDelete">
+            </div>
+            <button id="deleteEventp">Eliminar evento</button>
+
+        </div>
+        <div class="col-8">
             <div class="table-responsive">
                 <table class="table table-bordered" id="table_events">
                     <thead>
@@ -151,6 +182,7 @@
                             <th scope="col">Fecha</th>
                             <th scope="col">Ubicacion</th>
                             <th scope="col">Disciplina</th>
+                            <th scope="col">Posiciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -159,6 +191,19 @@
                 </table>
             </div>
         </div>
+    </div>
+    <div class="row">
+        <h2 class="title_sub">Agregar posicion a un estudiante</h2>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="input-Event">Id:evento</span>
+            <input type="number" class="form-control" aria-label="id" aria-describedby="input-Event" id="input-id-eventr">
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="input-Student">Id:estudiante</span>
+            <input type="number" class="form-control" aria-label="id" aria-describedby="input-Student" id="input-id-student">
+        </div>
+
+        <button id="add-position-to-event">Anadir puestos</button>
 
     </div>
 
@@ -173,6 +218,7 @@
         <p>© 2024 Club Deportivo - Todos los derechos reservados.</p>
     </footer>
 
+    <script src="js/request_events.js"></script>
     <script src="js/request_student.js"></script>
 </body>
 </html>
