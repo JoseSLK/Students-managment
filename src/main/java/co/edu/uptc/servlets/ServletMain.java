@@ -5,6 +5,7 @@ import co.edu.uptc.controller.GeneralController;
 import co.edu.uptc.dao.DisciplineDAO;
 import co.edu.uptc.dao.EventDAO;
 import co.edu.uptc.dao.StudentsDAO;
+import co.edu.uptc.model.Discipline;
 import co.edu.uptc.model.Event;
 import co.edu.uptc.model.Student;
 import com.google.gson.Gson;
@@ -104,6 +105,13 @@ public class ServletMain extends HttpServlet {
                     response.getWriter().write(event1.getName()+": jugador agregado correctamente");
                 }else response.getWriter().write("");
                 break;
+            case "add_discipline":
+                BufferedReader dis = request.getReader();
+                Discipline discipline = gson.fromJson(dis, Discipline.class);
+                if(disciplineDAO.addDiscipline(discipline.getName(), discipline.getId()) != null){
+                    response.getWriter().write(gson.toJson(discipline));
+                }else response.getWriter().write("");
+                break;
 
         }
     }
@@ -125,6 +133,12 @@ public class ServletMain extends HttpServlet {
                 int idEvent = Integer.parseInt(req.getParameter("id"));
                 if (eventDAO.findEventById(idEvent) != null){
                     resp.getWriter().write(gson.toJson(eventDAO.deleteEvent(idEvent)));
+                }else resp.getWriter().write("");
+                break;
+            case "delete_discipline":
+                int idDiscipline = Integer.parseInt(req.getParameter("id"));
+                if(disciplineDAO.findDisciplineById(idDiscipline) != null){
+                    resp.getWriter().write(gson.toJson(disciplineDAO.deleteDiscipline(idDiscipline)));
                 }else resp.getWriter().write("");
                 break;
         }
